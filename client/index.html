@@ -59,6 +59,18 @@
         </tfoot>
     </table>
     
-    <script src="./js/lib/index.js"></script>
+    <script src="./js/app/models/Negociacao.js"></script>
+    <script>
+        
+        const n1 = new Negociacao(new Date(), 10, 500);
+        // Congelando o objeto
+        Object.freeze(n1)
+        n1._quantidade = 10000000000
+        
+        console.log(n1.data);
+        console.log(n1.quantidade);
+        console.log(n1.valor);
+        
+    </script>
 </body>
 </html>
