@@ -8,7 +8,6 @@ class Negociacao {
         
         // Congelando o objeto
         Object.freeze(this)
-        
     }
 
     get volume() {
@@ -16,6 +15,7 @@ class Negociacao {
     }
 
     get data() {
+        // Fazendo com que o usuário não possa mecher usando atributos de uma instância Date
         return new Date(this._data.getTime())
     }
     get quantidade() {
