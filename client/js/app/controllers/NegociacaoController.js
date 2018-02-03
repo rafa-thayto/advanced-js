@@ -1,21 +1,34 @@
 class NegociacaoController {
 
-    constructor() { }
+    constructor() { 
 
-    adiciona(event) {
-        event.preventDefault()
-        
         // Fazendo o vanilla parecer com JQuery
         const $ = document.querySelector.bind(document)
         // ou
         // const $ = target => document.querySelector(target)
-        const $inputData = $('#data')
-        const $inputQuantidade = $('#quantidade')
-        const $inputValor = $('#valor')
+        this._inputData = $('#data')
+        this._inputQuantidade = $('#quantidade')
+        this._inputValor = $('#valor')
+        Object.freeze(this)
+    }
 
-        console.log($inputData.value)
-        console.log($inputQuantidade.value)
-        console.log($inputValor.value)
+    adiciona(event) {
+        event.preventDefault()
+
+        let date = new Date(...
+            this._inputData.value
+                .split('-')
+                .map((item, indice) => item - indice % 2)
+        )
+        console.log(date)
+
+        /* const negociacao = new Negociacao(
+            this._inputData.value,
+            this._inputQuantidade.value,
+            this._inputValor.value
+        ) */
+
+        // console.log(negociacao)
         
 
     }
