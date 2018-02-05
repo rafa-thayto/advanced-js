@@ -27,6 +27,12 @@ class NegociacoesView {
             </tbody>
             
             <tfoot>
+                <tr>
+                    <td colspan="3"></td>
+                    <td>${ 
+                        model.negociacoes.reduce((total, neg) => total + neg.volume, 0.0)
+                    }</td>
+                </tr>
             </tfoot>
         </table>    
         `        
@@ -35,5 +41,7 @@ class NegociacoesView {
     update(model) {
         this._elemento.innerHTML = this._template(model)
     }
+    
+
     
 } 
