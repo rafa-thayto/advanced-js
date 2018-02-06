@@ -1,6 +1,7 @@
-class NegociacoesView {
+class NegociacoesView extends View{
     constructor(elemento) { 
-        this._elemento = elemento
+        // Manada o atributo para o elemento pai
+        super(elemento)
     }
 
     _template(model) {
@@ -37,11 +38,5 @@ class NegociacoesView {
         </table>    
         `        
     }
-    
-    update(model) {
-        this._elemento.innerHTML = this._template(model)
-    }
-    
-
     
 } 
