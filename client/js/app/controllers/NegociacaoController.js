@@ -11,7 +11,25 @@ class NegociacaoController {
         this._inputValor = $('#valor')
         // Pode colocar também uma arrow function que aí o this recebe o contexto lexico 
         // de onde está ou seja o this é a própria classe, não a classe do pai
-        this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model) )
+        // this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model) )
+
+        const self = this
+        this._listaNegociacoes = new Proxy(new ListaNegociacoes(), {
+            get(target, prop, receiver) {
+
+                if(['adiciona', 'esvazia'].includes(prop) && typeof(target[prop]) == typeof(Function)) {
+
+                    return function() {
+                        console.log(`Interceptando ${prop}`)
+                        Reflect.apply(target[prop], target, arguments)
+                        self._negociacoesView.update(target)
+                    }
+
+                }
+
+                return Reflect.get(target, prop, receiver)
+            }
+        })
         
         this._negociacoesView = new NegociacoesView($('#negociacoesView'))
         this._negociacoesView.update(this._listaNegociacoes)
