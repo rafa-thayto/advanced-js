@@ -11,9 +11,7 @@ class NegociacaoController {
         this._inputValor = $('#valor')
         // Pode colocar também uma arrow function que aí o this recebe o contexto lexico 
         // de onde está ou seja o this é a própria classe, não a classe do pai
-        this._listaNegociacoes = new ListaNegociacoes(this, function(model) {
-            this._negociacoesView.update(model)
-        })
+        this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model) )
         
         this._negociacoesView = new NegociacoesView($('#negociacoesView'))
         this._negociacoesView.update(this._listaNegociacoes)
