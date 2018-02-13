@@ -6,7 +6,7 @@ class ProxyFactory {
             
             get(target, prop, receiver) {
 
-                if(props.includes(prop) && typeof(target[prop]) == typeof(Function)) {
+                if(props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
 
                     return function() {
                         console.log(`Interceptando ${prop}`)
@@ -20,11 +20,18 @@ class ProxyFactory {
             },
 
             set(target, prop, value, receiver) {
-                Reflect.set(target, prop, value, receiver)
-                acao(target)
+                if(props.includes(prop)) {
+                    acao(target)
+                }
+
+                return Reflect.set(target, prop, value, receiver)
             }
 
         })
+    }
+
+    static _isFunction(func) {
+        return typeof(func) == typeof(Function)
     }
 
 }
