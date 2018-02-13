@@ -12,21 +12,16 @@ class NegociacaoController {
         // Pode colocar também uma arrow function que aí o this recebe o contexto lexico 
         // de onde está ou seja o this é a própria classe, não a classe do pai
         // this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model) )
-
-        this._negociacoesView = new NegociacoesView($('#negociacoesView'))
         
         this._listaNegociacoes = new Bind(
                                     new ListaNegociacoes(),
-                                    this._negociacoesView,
-                                    ['adiciona', 'esvazia'])
+                                    new NegociacoesView($('#negociacoesView')),
+                                    'adiciona', 'esvazia')
 
-        
-        this._mensagemView = new MensagemView($('#mensagemView'))
-        
         this._mensagem = new Bind(
                                 new Mensagem(),
-                                this._mensagemView,
-                                ['texto'])
+                                new MensagemView($('#mensagemView')),
+                                'texto')
         Object.freeze(this)
     }
 
