@@ -20,11 +20,11 @@ class ProxyFactory {
             },
 
             set(target, prop, value, receiver) {
-                if(props.includes(prop)) {
-                    acao(target)
-                }
 
-                return Reflect.set(target, prop, value, receiver)
+                const retorno = Reflect.set(target, prop, value, receiver);
+                if(props.includes(prop)) acao(target);    // só executa acao(target) se for uma propriedade monitorada
+                return retorno; 
+                
             }
 
         })
