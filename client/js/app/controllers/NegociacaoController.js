@@ -42,6 +42,27 @@ class NegociacaoController {
         this._mensagem = 'Negociações apagadas com sucesso!'
     }
 
+    importaNegociacoes() {
+        const xhr = new XMLHttpRequest
+
+        // Preparando ambiente
+        xhr.open('GET', 'negociacoes/semana')
+
+        xhr.onreadystatechange = () => {
+
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    console.log('Obtendo mensagens do servidor')
+                } else {
+                    console.log('Deu merda')
+                }
+            }
+            
+        }
+
+        xhr.send()
+    }
+
     _criaNegociacao() {
         return new Negociacao(
             DateHelper.textoParaData(this._inputData.value),
