@@ -1,7 +1,6 @@
 class ListaNegociacoes {
     constructor() {
         this._negociacoes= []
-        Object.freeze(this)
     }
 
     adiciona(negociacao) {

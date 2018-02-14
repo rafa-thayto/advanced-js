@@ -14,15 +14,14 @@ class NegociacaoController {
         // this._listaNegociacoes = new ListaNegociacoes(model => this._negociacoesView.update(model) )
         
         this._listaNegociacoes = new Bind(
-                                    new ListaNegociacoes(),
-                                    new NegociacoesView($('#negociacoesView')),
-                                    'adiciona', 'esvazia')
+                                new ListaNegociacoes(),
+                                new NegociacoesView($('#negociacoesView')),
+                                'adiciona', 'esvazia')
 
         this._mensagem = new Bind(
-                                new Mensagem(),
-                                new MensagemView($('#mensagemView')),
-                                'texto')
-        Object.freeze(this)
+                            new Mensagem(),
+                            new MensagemView($('#mensagemView')),
+                            'texto')
     }
 
     adiciona(event) {
@@ -34,12 +33,11 @@ class NegociacaoController {
         this._limpaFormulario()
     }
 
-    apaga(event) {
-        event.preventDefault()
+    apaga() {
 
         this._listaNegociacoes.esvazia()
 
-        this._mensagem = 'Negociações apagadas com sucesso!'
+        this._mensagem.texto = 'Negociações apagadas com sucesso!'
     }
 
     importaNegociacoes() {
@@ -52,9 +50,14 @@ class NegociacaoController {
 
             if (xhr.readyState === 4) {
                 if (xhr.status === 200) {
-                    console.log('Obtendo mensagens do servidor')
+                    
+                    JSON.parse(xhr.responseText)
+                        .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor))
+                        .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
+                    this._mensagem.texto = 'Negociações importadas com sucesso!'
                 } else {
-                    console.log('Deu merda')
+                    console.log(xhr.responseText)
+                    this._mensagem.texto = 'Não foi possível obter as negociações da semana!'
                 }
             }
             
