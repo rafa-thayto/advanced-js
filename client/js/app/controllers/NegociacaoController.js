@@ -51,7 +51,7 @@ class NegociacaoController {
                 negociacoes
                     .reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
                     .forEach(negociacao => this._listaNegociacoes.adiciona(negociacao))
-                this._mensagem = 'Negociações adicionadas com sucesso!'
+                this._mensagem.texto = 'Negociações adicionadas com sucesso!'
             }).catch(erro => this._mensagem.texto = erro)
 
     }
