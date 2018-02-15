@@ -1,79 +1,92 @@
 class NegociacaoService {
 
-    obterNegociacoesDaSemana(callback) {
-        
-        const xhr = new XMLHttpRequest
+    obterNegociacoesDaSemana() {
 
-        // Preparando ambiente
-        xhr.open('GET', 'negociacoes/semana')
+        return new Promise((resolve, reject) => {
 
-        xhr.onreadystatechange = () => {
+            const xhr = new XMLHttpRequest
 
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
+            // Preparando ambiente
+            xhr.open('GET', 'negociacoes/semana')
 
-                    callback(null, JSON.parse(xhr.responseText)
-                        .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
-                } else {
-                    console.log(xhr.responseText)
-                    callback('Não foi possível obter as negociações da semana!')
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+
+                        resolve(JSON.parse(xhr.responseText)
+                            .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+                    } else {
+                        console.log(xhr.responseText)
+                        reject('Não foi possível obter as negociações da semana!')
+                    }
                 }
+
             }
 
-        }
+            xhr.send()
 
-        xhr.send()
-        
+        })
+
     }
-    obterNegociacoesDaSemanaAnterior(callback) {
-        
-        const xhr = new XMLHttpRequest
 
-        // Preparando ambiente
-        xhr.open('GET', 'negociacoes/anterior')
+    obterNegociacoesDaSemanaAnterior() {
 
-        xhr.onreadystatechange = () => {
+        return new Promise((resolve, reject) => {
 
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
+            const xhr = new XMLHttpRequest
 
-                    callback(null, JSON.parse(xhr.responseText)
-                        .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
-                } else {
-                    console.log(xhr.responseText)
-                    callback('Não foi possível obter as negociações da semana!')
+            // Preparando ambiente
+            xhr.open('GET', 'negociacoes/anterior')
+
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+
+                        resolve(JSON.parse(xhr.responseText)
+                            .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+                    } else {
+                        console.log(xhr.responseText)
+                        reject('Não foi possível obter as negociações da semana anterior!')
+                    }
                 }
+
             }
 
-        }
+            xhr.send()
 
-        xhr.send()
-        
-    
+        })
+
     }
-    obterNegociacoesDaSemanaRetrasada(callback) {
-        
-        const xhr = new XMLHttpRequest
 
-        // Preparando ambiente
-        xhr.open('GET', 'negociacoes/retrasada')
+    obterNegociacoesDaSemanaRetrasada() {
 
-        xhr.onreadystatechange = () => {
+        return new Promise((resolve, reject) => {
 
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
+            const xhr = new XMLHttpRequest
 
-                    callback(null, JSON.parse(xhr.responseText)
-                        .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
-                } else {
-                    console.log(xhr.responseText)
-                    callback('Não foi possível obter as negociações da semana!')
+            // Preparando ambiente
+            xhr.open('GET', 'negociacoes/retrasada')
+
+            xhr.onreadystatechange = () => {
+
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+
+                        resolve(JSON.parse(xhr.responseText)
+                            .map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)))
+                    } else {
+                        console.log(xhr.responseText)
+                        reject('Não foi possível obter as negociações da semana retrasada!')
+                    }
                 }
+
             }
 
-        }
+            xhr.send()
+        })
 
-        xhr.send()
-        
     }
+
 }
