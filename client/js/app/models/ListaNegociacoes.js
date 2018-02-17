@@ -1,6 +1,6 @@
 class ListaNegociacoes {
     constructor() {
-        this._negociacoes= []
+        this._negociacoes= []        
     }
 
     adiciona(negociacao) {
@@ -14,4 +14,8 @@ class ListaNegociacoes {
     esvazia() {
         this._negociacoes = []
     }   
+    
+    ordena(criterio) {
+        this._negociacoes.sort(criterio)
+    }
 }

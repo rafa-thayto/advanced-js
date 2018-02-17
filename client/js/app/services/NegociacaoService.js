@@ -18,6 +18,7 @@ class NegociacaoService {
                     reject('Não foi possível importar as negociações da semana!')
                 })
 
+
         })
 
     }
